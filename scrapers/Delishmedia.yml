@@ -51,6 +51,7 @@ xPathScrapers:
       Image: $videoPosterItem
       Tags:
         Name: $videoItem/div[2]/div/p/a[@rel='category tag']/text()
+
   sceneQueryScraper:
     common:
       $videoItem: //div[starts-with(@class, 'movie-list')]/div[@class="item"]
@@ -65,21 +66,21 @@ xPathScrapers:
         # If you don't support cookie you can use this regex.
         #    - regex: $
         #      with: "?locale=en"
+
   sceneScraper:
     scene:
-      Title: //strong[@class="current-title"]/text()
-      Code: //a[@title="Copy ID"]/@data-clipboard-text
-      Date: //strong[text()='Released Date:']/../span/text()
-      Director: //strong[text()='Director:']/../span/a/text()
+      Title: /html/body/div[3]/div[1]/article/div[1]/div/h1/text()
+      Date: /html/body/div[3]/div[1]/article/div[4]/h6[2]/time[1]/text()
       Tags:
-        Name: //strong[text()='Tags:']/../span/a/text()
+        Name: /html/body/div[3]/div[1]/article/div[4]/h6[1]/text()
       Performers:
-        Name: //strong[text()='Actor(s):']/../span/a/text()
+        Name: /html/body/div[3]/div[1]/article/b/a/text()
       Studio:
         Name:
           selector: //strong[text()='Maker:']/../span/a/text()|//strong[text()='Publisher:']/../span/a/text()
-      Image: //img[@class="video-cover"]/@src
+      Image: /html/body/div[3]/div[1]/article/div[5]/div[2]/div/div[1]/b/a/img/@src
       URL: //link[@rel="canonical"]/@href
+
   movieScraper:
     movie:
       Name:
