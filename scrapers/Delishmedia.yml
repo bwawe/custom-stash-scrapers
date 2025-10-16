@@ -45,7 +45,7 @@ xPathScrapers:
       $videoPosterItem: /html/body/div[3]/div/div[2]/article/div[1]/a/div[1]/div/img/@src
       $videoItem: /html/body/div[3]/div/div[2]/article
     scene:
-      Title: $videoItem//h5[0]/text()
+      Title: $videoItem/div[1]/a/header/h5/text()
       URL: $videoItem/div[1]/a/@href
       Date: $videoItem/div[1]/a/div[2]/time[2]/text()
       Image: $videoPosterItem
