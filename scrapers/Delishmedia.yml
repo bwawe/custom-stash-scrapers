@@ -70,7 +70,9 @@ xPathScrapers:
   sceneScraper:
     scene:
       Title: /html/body/div[3]/div[1]/article/div[1]/div/h1/text()
-      Date: /html/body/div[3]/div[1]/article/div[4]/h6[2]/time[1]/text()
+      Date:
+        selector: /html/body/div[3]/div[1]/article/div[4]/h6[2]/time[1]/text()
+        parseDate: January 2, 2006
       Tags:
         Name: /html/body/div[3]/div[1]/article/div[4]/h6[1]/a/text()
       Performers:
