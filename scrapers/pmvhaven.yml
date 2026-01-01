@@ -48,11 +48,9 @@ jsonScrapers:
       Studio:
         Name: $data.creator.0
       Tags:
-        Name:
-          selector: $data.tags.#
+        Name: $data.tags.#.this
       Performers:
-        Name:
-          selector: $data.starsTags.#
+        Name: $data.starsTags.#.this
 
   sceneScraper:
     scene:
