@@ -48,6 +48,9 @@ jsonScrapers:
         Name: $data.creator.0
       Tags:
         Name: $data.tags
+      Performers:
+        Name: $data.starsTags
+      Details: $data.description
 
   sceneScraper:
     scene:
@@ -59,7 +62,6 @@ jsonScrapers:
               - regex: "T(.*)$"
                 with: ""
           - parseDate: 2006-01-02
-
       Details: data.video.description
       Tags:
         Name: data.video.tags
