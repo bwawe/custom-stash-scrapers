@@ -33,20 +33,20 @@ jsonScrapers:
     common:
       $data: data
     scene:
-      Title: title
+      Title: $data.title
       URL:
-        selector: _id
+        selector: $data._id
         postProcess:
           - replace:
               - regex: (.*)
                 with: https://pmvhaven.com/video/$1
       Date:
-        selector: uploadDate
+        selector: $data.uploadDate
         parseDate: 2006-01-02T15:04:05.000Z
-      Image: thumbnailUrl
-      Details: description
+      Image: $data.thumbnailUrl
+      Details: $data.description
       Studio:
-        Name: creator.0
+        Name: $data.creator.0
       Tags:
         Name: tags.#
       Performers:
