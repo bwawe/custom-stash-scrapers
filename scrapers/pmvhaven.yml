@@ -47,8 +47,6 @@ jsonScrapers:
       Details: $data.description
       Studio:
         Name: $data.creator.0
-      Tags:
-        Name: ["Porn Music Video"]
 
   sceneScraper:
     scene:
