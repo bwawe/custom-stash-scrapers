@@ -1,3 +1,32 @@
+name: PMVHaven
+
+# Search in tagging mode
+sceneByQueryFragment:
+  action: scrapeJson
+  queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
+  scraper: sceneSearch
+
+sceneByName:
+  action: scrapeJson
+  queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
+  scraper: sceneSearch
+
+# Set url to scrape
+sceneByURL:
+  - action: scrapeJson
+    url:
+      - pmvhaven.com/video/
+    queryURL: https://pmvhaven.com/api/videos/{url}/watch-page
+    queryURLReplace:
+      url:
+        - regex: .*([a-z0-9]{24}).*
+          with: $1
+    scraper: sceneScraper
+
+sceneByFragment:
+  action: scrapeJson
+  queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
+  scraper: sceneScraper
 
 jsonScrapers:
   sceneSearch:
@@ -22,3 +51,28 @@ jsonScrapers:
       Performers:
         Name: $data.starsTags
       Details: $data.description
+
+  sceneScraper:
+    scene:
+      Title: data.video.title
+      Date:
+        selector: data.video.uploadDate
+        postProcess:
+          - replace:
+              - regex: "T(.*)$"
+                with: ""
+          - parseDate: 2006-01-02
+      Details: data.video.description
+      Tags:
+        Name: data.video.tags
+      Performers:
+        Name: data.video.starsTags
+      Image: data.video.thumbnailUrl
+      Studio:
+        Name: data.video.creator.0
+      URL:
+        selector: data.video._id
+        postProcess:
+          - replace:
+              - regex: (.*)
+                with: https://pmvhaven.com/video/$1
