@@ -1,4 +1,10 @@
 name: PMVHaven
+
+sceneByName:
+  action: scrapeJson
+  scraper: sceneSearch
+  queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
+
 sceneByURL:
   - action: scrapeJson
     url:
@@ -10,7 +16,7 @@ sceneByURL:
           with: $1
     scraper: sceneScraper
 
-sceneByName:
+sceneByFragment:
   action: scrapeJson
   scraper: sceneSearch
   queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
@@ -18,9 +24,9 @@ sceneByName:
 jsonScrapers:
   sceneSearch:
     scene:
-      Title: data.videos.title
+      Title: data.title
       Studio:
-        Name: data.videos.uploader
+        Name: data.uploader
 
   sceneScraper:
     scene:
@@ -47,5 +53,3 @@ jsonScrapers:
           - replace:
               - regex: (.*)
                 with: https://pmvhaven.com/video/$1
-
-# Last Updated December 7, 2025
