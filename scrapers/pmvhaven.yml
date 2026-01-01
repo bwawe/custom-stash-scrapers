@@ -18,8 +18,8 @@ sceneByURL:
 
 sceneByFragment:
   action: scrapeJson
-  scraper: sceneSearch
   queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
+  scraper: sceneScraper
 
 jsonScrapers:
   sceneSearch:
@@ -27,6 +27,11 @@ jsonScrapers:
       Title: data.title
       Studio:
         Name: data.uploader
+      URL: data.videoUrl
+      Date: data.uploadDate
+      Image: data.thumbnailUrl
+      Tags:
+        Name: data.tags
 
   sceneScraper:
     scene:
