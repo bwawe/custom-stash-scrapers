@@ -48,8 +48,12 @@ jsonScrapers:
         Name: $data.creator.0
       Tags:
         Name: $data.tags
+        postProcess:
+          - flatten
       Performers:
         Name: $data.starsTags
+        postProcess:
+          - flatten
       Details: $data.description
 
   sceneScraper:
