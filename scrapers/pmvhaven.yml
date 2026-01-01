@@ -39,7 +39,7 @@ jsonScrapers:
         postProcess:
           - replace:
               - regex: (.*)
-                with: https://haven.com/video/$1
+                with: https://pmvhaven.com/video/$1
       Date:
         selector: $data.uploadDate
         parseDate: 2006-01-02T15:04:05.000Z
