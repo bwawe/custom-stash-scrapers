@@ -12,17 +12,15 @@ sceneByURL:
 
 sceneByName:
   action: scrapeJson
-  queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
   scraper: sceneSearch
+  queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
 
 jsonScrapers:
   sceneSearch:
-    common:
-      $videoItem: videos
     scene:
-      Title: $videoItem.title
+      Title: data.videos.title
       Studio:
-        Name: $videoItem.uploader
+        Name: data.videos.uploader
 
   sceneScraper:
     scene:
