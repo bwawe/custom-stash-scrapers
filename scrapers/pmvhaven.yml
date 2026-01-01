@@ -23,15 +23,10 @@ sceneByFragment:
 
 jsonScrapers:
   sceneSearch:
+    common:
+      $data: data.0
     scene:
-      Title: data.title
-      Studio:
-        Name: data.uploader
-      URL: data.videoUrl
-      Date: data.uploadDate
-      Image: data.thumbnailUrl
-      Tags:
-        Name: data.tags
+      Title: $data.title
 
   sceneScraper:
     scene:
