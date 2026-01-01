@@ -10,9 +10,9 @@ sceneByURL:
           with: $1
     scraper: sceneScraper
 
-sceneByFragment:
+sceneByName:
   action: scrapeJson
-  queryURL: https://pmvhaven.com/api/videos/search?limit=128&page=1&q={filename}
+  queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
   scraper: sceneSearch
 
 jsonScrapers:
