@@ -30,25 +30,25 @@ sceneByFragment:
 
 jsonScrapers:
   sceneSearch:
+    common:
+      $data: data.#
     scene:
-      Title: data.#.starsTags.title
+      Title: $data.title
       URL:
-        selector: data.#.starsTags._id
+        selector: $data._id
         postProcess:
           - replace:
               - regex: (.*)
                 with: https://haven.com/video/$1
       Date:
-        selector: data.#.starsTags.uploadDate
+        selector: $data.uploadDate
         parseDate: 2006-01-02T15:04:05.000Z
-      Image: data.#.starsTags.thumbnailUrl
-      Details: data.#.starsTags.description
+      Image: $data.thumbnailUrl
+      Details: $data.description
       Studio:
-        Name: data.#.starsTags.creator.0
+        Name: $data.creator.0
       Tags:
-        Name: data.#.tags
-      Performers:
-        Name: data.#.starsTags
+        Name: $data.top5Tags
 
   sceneScraper:
     scene:
