@@ -51,11 +51,9 @@ jsonScrapers:
         Tags:
           Name:
             selector: $data.tags
-            concat: .#
         Performers:
           Name:
             selector: $data.starsTags
-            concat: .#
 
   sceneScraper:
     scene:
