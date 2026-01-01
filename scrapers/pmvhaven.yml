@@ -1,14 +1,17 @@
 name: PMVHaven
 
+# Search in tagging mode
 sceneByQueryFragment:
   action: scrapeJson
   queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
   scraper: sceneSearch
+
 sceneByName:
   action: scrapeJson
   queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
   scraper: sceneSearch
 
+# Set url to scrape
 sceneByURL:
   - action: scrapeJson
     url:
@@ -27,10 +30,26 @@ sceneByFragment:
 
 jsonScrapers:
   sceneSearch:
-    common:
-      $data: data.0
     scene:
-      Title: $data.title
+      Title: data.title
+      URL:
+        selector: data._id
+        postProcess:
+          - replace:
+              - regex: (.*)
+                with: https://pmvhaven.com/video/$1
+      Date:
+        selector: data.uploadDate
+        postProcess:
+          - replace:
+              - regex: "T(.*)$"
+                with: ""
+          - parseDate: 2006-01-02
+      Image: data.thumbnailUrl
+      Studio:
+        Name: data.creator.0
+      Tags:
+        Name: $videoItem/div[2]/div/p/a[@rel='category tag']/text()
 
   sceneScraper:
     scene:
