@@ -47,10 +47,10 @@ jsonScrapers:
       Studio:
         Name: $data.creator.0
       Tags:
-        Name: $data.tags
+        Name: data.tags
       Performers:
-        Name: $data.starsTags
-      Details: $data.description
+        Name: data.starsTags
+      Details: data.description
 
   sceneScraper:
     scene:
