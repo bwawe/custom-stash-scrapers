@@ -1,9 +1,4 @@
 name: PMVHaven
-sceneByName:
-  action: scrapeJson
-  queryURL: https://pmvhaven.com/api/videos/search?limit=128&page=1&q={}
-  scraper: sceneSearch
-
 sceneByURL:
   - action: scrapeJson
     url:
@@ -17,12 +12,8 @@ sceneByURL:
 
 sceneByFragment:
   action: scrapeJson
-  queryURL: https://pmvhaven.com/api/videos/{filename}/watch-page
-  queryURLReplace:
-    filename:
-      - regex: .*([a-z0-9]{24}).*
-        with: $1
-  scraper: sceneScraper
+  queryURL: https://pmvhaven.com/api/videos/search?limit=128&page=1&q={filename}
+  scraper: sceneSearch
 
 jsonScrapers:
   sceneSearch:
