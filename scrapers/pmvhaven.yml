@@ -47,8 +47,18 @@ jsonScrapers:
       Details: $data.description
       Studio:
         Name: $data.creator.0
-      Tags: $data.tags
-      Performers: $data.starsTags
+      Tags:
+        Name: 
+          selector: $data.tags
+          postProcess:
+            - script: |
+                return input.map(tag => ({ Name: tag }));
+      Performers:
+        Name:
+          selector: $data.starsTags
+          postProcess:
+            - script: |
+                return input.map(performer => ({ Name: performer }));
         
   sceneScraper:
     scene:
