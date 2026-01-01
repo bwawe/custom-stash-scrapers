@@ -2,8 +2,8 @@ name: PMVHaven
 
 sceneByName:
   action: scrapeJson
-  scraper: sceneSearch
   queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
+  scraper: sceneSearch
 
 sceneByURL:
   - action: scrapeJson
@@ -16,10 +16,10 @@ sceneByURL:
           with: $1
     scraper: sceneScraper
 
-sceneByFragment:
+sceneByQueryFragment:
   action: scrapeJson
   queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
-  scraper: sceneScraper
+  scraper: sceneSearch
 
 jsonScrapers:
   sceneSearch:
@@ -53,3 +53,32 @@ jsonScrapers:
           - replace:
               - regex: (.*)
                 with: https://pmvhaven.com/video/$1
+  movieScraper:
+    movie:
+      Name:
+        selector: //strong[text()='ID:']/../span
+        concat: "|"
+        postProcess:
+          - replace:
+              - regex: \|
+                with: ""
+      Director: //strong[text()='Director:']/../span/a/text()
+      Duration:
+        selector: //strong[text()='Duration:']/../span/text()
+        postProcess:
+          - replace:
+              - regex: \D
+                with: ""
+      Date: //strong[text()='Released Date:']/../span/text()
+      Synopsis:
+        selector: //h2[@class="title is-4"]/strong/text()
+        postProcess:
+          - replace:
+              - regex: (.*?\s)(.+)
+                with: $2
+      Studio:
+        Name:
+          selector: //strong[text()='Maker:']/../span/a/text()|//strong[text()='Publisher:']/../span/a/text()
+      FrontImage:
+        selector: //img[@class="video-cover"]/@src
+      URL: //link[@rel="canonical"]/@href
