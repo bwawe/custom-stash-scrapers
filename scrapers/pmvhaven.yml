@@ -34,6 +34,24 @@ jsonScrapers:
       $data: data.#
     scene:
       Title: $data.title
+      URL:
+        selector: $data._id
+        postProcess:
+          - replace:
+              - regex: (.*)
+                with: https://pmvhaven.com/video/$1
+      Date:
+        selector: $data.uploadDate
+        postProcess:
+          - replace:
+              - regex: "T(.*)$"
+                with: ""
+          - parseDate: 2006-01-02
+      Image: $data.thumbnailUrl
+      Studio:
+        Name: $data.creator.0
+      Tags:
+        Name: $data.video.tags
 
   sceneScraper:
     scene:
