@@ -4,6 +4,11 @@ sceneByName:
   queryURL: https://pmvhaven.com/search?q={}
   scraper: sceneSearch
 
+sceneByQueryFragment:
+  action: scrapeXPath
+  queryURL: "{url}"
+  scraper: sceneScraper
+
 xPathScrapers:
   sceneSearch:
     common:
