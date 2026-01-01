@@ -30,27 +30,29 @@ sceneByFragment:
 
 jsonScrapers:
   sceneSearch:
-    common:
-      $data: data.#
     scene:
-      Title: $data.title
+      Title: data.videos[].title
       URL:
-        selector: $data._id
+        selector: data.videos[]._id
         postProcess:
           - replace:
               - regex: (.*)
                 with: https://pmvhaven.com/video/$1
       Date:
-        selector: $data.uploadDate
-        parseDate: 2006-01-02T15:04:05.000Z
-      Image: $data.thumbnailUrl
-      Details: $data.description
+        selector: data.videos[].uploadDate
+        postProcess:
+          - replace:
+              - regex: T.*$
+                with: ""
+          - parseDate: 2006-01-02
+      Image: data.videos[].thumbnailUrl
+      Details: data.videos[].description
       Studio:
-        Name: $data.creator.0
+        Name: data.videos[].creator.0
       Tags:
-        Name: $data.tags
+        Name: data.videos[].tags[]
       Performers:
-        Name: $data.starsTags
+        Name: data.videos[].starsTags[]
 
   sceneScraper:
     scene:
