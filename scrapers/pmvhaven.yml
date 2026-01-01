@@ -27,7 +27,7 @@ sceneByFragment:
   action: scrapeJson
   queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
   scraper: sceneScraper
-  
+
 jsonScrapers:
   sceneSearch:
     common:
@@ -39,7 +39,7 @@ jsonScrapers:
         postProcess:
           - replace:
               - regex: (.*)
-                with: https://pmvhaven.com/video/$1
+                with: https://haven.com/video/$1
       Date:
         selector: $data.uploadDate
         parseDate: 2006-01-02T15:04:05.000Z
@@ -48,18 +48,10 @@ jsonScrapers:
       Studio:
         Name: $data.creator.0
       Tags:
-        Name: 
-          selector: $data.tags
-          postProcess:
-            - script: |
-                return input.map(tag => ({ Name: tag }));
+        Name: $data.tags
       Performers:
-        Name:
-          selector: $data.starsTags
-          postProcess:
-            - script: |
-                return input.map(performer => ({ Name: performer }));
-        
+        Name: $data.starsTags
+
   sceneScraper:
     scene:
       Title: data.video.title
