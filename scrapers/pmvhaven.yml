@@ -48,28 +48,30 @@ jsonScrapers:
       Studio:
         Name: $data.creator.0
       Tags:
-        Name: $data.top5Tags
+        Name: $data.0.top5Tags
+      Performers:
+        Name: $data.0.starsTags
 
   sceneScraper:
     scene:
-      Title: video.title
+      Title: data.video.title
       Date:
-        selector: video.uploadDate
+        selector: data.video.uploadDate
         postProcess:
           - replace:
               - regex: "T(.*)$"
                 with: ""
           - parseDate: 2006-01-02
-      Details: video.description
+      Details: data.video.description
       Tags:
-        Name: video.tags
+        Name: data.video.tags
       Performers:
-        Name: video.starsTags
-      Image: video.thumbnailUrl
+        Name: data.video.starsTags
+      Image: data.video.thumbnailUrl
       Studio:
-        Name: video.creator.0
+        Name: data.video.creator.0
       URL:
-        selector: video._id
+        selector: data.video._id
         postProcess:
           - replace:
               - regex: (.*)
