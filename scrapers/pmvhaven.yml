@@ -1,8 +1,8 @@
 name: PMVHaven
 
 sceneByName:
-  action: scrapeJson
-  queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
+  action: scrapeXPath
+  queryURL: https://delishmedia.com/?s={}
   scraper: sceneSearch
 
 sceneByURL:
@@ -21,13 +21,20 @@ sceneByQueryFragment:
   queryURL: https://pmvhaven.com/api/videos/search?limit=32&page=1&q={}
   scraper: sceneSearch
 
-jsonScrapers:
+xPathScrapers:
   sceneSearch:
     common:
-      $data: data.0
+      $videoPosterItem: /html/body/div[3]/div/div[2]/article/div[1]/a/div[1]/div/img/@src
+      $videoItem: /html/body/div[3]/div/div[2]/article
     scene:
-      Title: $data.title
+      Title: $videoItem/div[1]/a/header/h5/text()
+      URL: $videoItem/div[1]/a/@href
+      Date: $videoItem/div[1]/a/div[2]/time[2]/text()
+      Image: $videoPosterItem
+      Tags:
+        Name: $videoItem/div[2]/div/p/a[@rel='category tag']/text()
 
+jsonScrapers:
   sceneScraper:
     scene:
       Title: data.video.title
